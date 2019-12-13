@@ -16,6 +16,8 @@ service: mercury
 provider:
   name: aws
   runtime: nodejs8.10
+  iamManagedPolicies:
+    - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   # If you want to change to a different AWS profile
   # from ~/.aws/credentials, you can do so here
   profile: default
@@ -33,7 +35,7 @@ functions:
   mercuryParser:
     handler: src/mercury-parser.default
     timeout: 10
-    memorySize: 256
+    memorySize: 512
     events:
       - http:
           method: get
